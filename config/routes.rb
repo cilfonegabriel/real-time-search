@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-  get 'search/create'
-  get 'search/index'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  resources :search, only: [:create, :index]
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  root to: 'search#index'
 end
