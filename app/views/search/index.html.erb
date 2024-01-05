@@ -1,0 +1,34 @@
+<div id="searchTitleContainer">
+  <h1 id="searchTitle">Recent Searches</h1>
+</div>
+
+<% if @recent_searches.present? %>
+  <ul>
+    <% @recent_searches.each do |search| %>
+      <li><%= "#{search.query} - #{search.created_at}" %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p id="noRecentSearchesMessage">No recent searches found.</p>
+<% end %>
+
+<form id="searchForm">
+  <label for="query">Search:</label>
+  <input type="text" id="query" name="query" required>
+  <button type="button" onclick="performSearch()">Search</button>
+</form>
+
+<div id="searchResultContainer" style="display: none;">
+  <p id="searchResult"></p>
+</div>
+
+<script>
+  function performSearch() {
+    var query = document.getElementById('query').value;
+    document.getElementById('searchTitle').innerText = 'Recent Searches';
+    document.getElementById('noRecentSearchesMessage').style.display = 'none';
+    document.getElementById('searchTitleContainer').style.display = 'block';
+    document.getElementById('searchResult').innerText = `You just searched: ${query}`;
+    document.getElementById('searchResultContainer').style.display = 'block';
+  }
+</script>
