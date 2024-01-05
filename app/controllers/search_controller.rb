@@ -13,5 +13,6 @@ class SearchController < ApplicationController
   end
 
   def index
+    @recent_search = Search.recent
   end
 end
