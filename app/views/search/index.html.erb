@@ -1,2 +1,20 @@
-<h1>Search#index</h1>
-<p>Find me in app/views/search/index.html.erb</p>
+<!-- app/views/search/index.html.erb -->
+
+<h1>Recent Searches</h1>
+
+<% if @recent_searches.present? %>
+  <ul>
+    <% @recent_searches.each do |search| %>
+      <li><%= search.query %> - <%= search.created_at %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No recent searches found.</p>
+<% end %>
+
+<!-- Agregar el formulario para nuevas búsquedas -->
+<form id="searchForm">
+  <label for="query">Search:</label>
+  <input type="text" id="query" name="query" required>
+  <button type="submit">Search</button>
+</form>
