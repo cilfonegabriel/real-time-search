@@ -1,44 +1,29 @@
-<div id="searchTitleContainer">
-  <h1 id="searchTitle">Recent Searches</h1>
-</div>
-
-<% if @recent_searches.present? %>
-  <ul>
-    <% @recent_searches.each do |search| %>
-      <li><%= "#{search.query} - #{search.created_at}" %></li>
-    <% end %>
-  </ul>
-<% else %>
-  <p id="noRecentSearchesMessage">No recent searches found.</p>
-<% end %>
-
-<form id="searchForm">
-  <label for="query">Search:</label>
-  <input type="text" id="searchBox"  name="query" required>
-  <button type="button" onclick="performSearch()">Search</button>
-</form>
-
-<div id="searchResultContainer" style="display: none;">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search App</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag 'application' %>
+</head>
+<body>
+  <div id="searchTitleContainer">
+    <h1 class="search-title">Recent Searches</h1>
+  </div>
+  <div id="searchResultContainer" style="display: none;">
     <p id="searchResult"></p>
-</div>
-
-<script>
-    function debounce(func, delay) {
-        let timeoutId;
-        return function () {
-        const context = this;
-        const args = arguments;
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => func.apply(context, args), delay);
-        };
-    }
-
-    function performSearch() {
-        var query = document.getElementById('query').value;
-        document.getElementById('searchTitle').innerText = 'Recent Searches';
-        document.getElementById('noRecentSearchesMessage').style.display = 'none';
-        document.getElementById('searchTitleContainer').style.display = 'block';
-        document.getElementById('searchResult').innerText = `You just searched: ${query}`;
-        document.getElementById('searchResultContainer').style.display = 'block';
-    }
-</script>
+  </div>
+  <div id="noRecentSearchesMessage" style="display: none;">
+  </div>
+  
+  <form id="searchForm">
+    <label for="query">Search:</label>
+    <input type="text" id="query" name="query" required>
+    
+    <button type="submit">Search</button>
+  </form>
+  <%= javascript_include_tag 'search' %>
+</body>
+</html>
